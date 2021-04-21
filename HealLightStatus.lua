@@ -853,6 +853,17 @@ addon.getFriendFromTargetString = function(targetString)
 	return nil;
 end
 
+addon.getTargetStringFromName = function(name)
+	for k, v in pairs(addon.friendBean) do
+		if (v ~= nil) then
+			if (v.name == name) then
+				return v.targetString;
+			end
+		end
+	end
+	return nil;
+end
+
 addon.getIndexFromTargetString = function(targetString)
 	for raidIndex = 1, 40 do
 		local testString = "raid" .. tostring(raidIndex);
@@ -1142,7 +1153,11 @@ addon.processWhisper = function(text, playerName)
 		
 		if bopTarget then
 			-- identify the next thingie
-			addon.nextActionBean = addon.getForceActionBean("Protection", bopTarget);
+			local bopTargetString = getTargetStringFromName(bopTarget);
+
+			if (bopTargetString) then
+				addon.nextActionBean = addon.getForceActionBean("Protection", bopTargetString);
+			end
 		elseif followName then
 			addon.followBean.targetName = followName;
 			addon.tankBean.targetName = tankName;
