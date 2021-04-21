@@ -1153,7 +1153,7 @@ addon.processWhisper = function(text, playerName)
 		
 		if bopTarget then
 			-- identify the next thingie
-			local bopTargetString = getTargetStringFromName(bopTarget);
+			local bopTargetString = addon.getTargetStringFromName(bopTarget);
 
 			if (bopTargetString) then
 				addon.nextActionBean = addon.getForceActionBean("Protection", bopTargetString);
