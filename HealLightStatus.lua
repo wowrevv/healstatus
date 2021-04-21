@@ -64,6 +64,7 @@ local SUB_LIGHT_ACTION_INDEXES = {
 	Mount = 11,
 
 	Protection = 13,
+	Bubble = 14,
 
 	Nothing = -1
 };
@@ -1156,7 +1157,8 @@ addon.processWhisper = function(text, playerName)
 			local bopTargetString = addon.getTargetStringFromName(bopTarget);
 
 			if (bopTargetString) then
-				addon.nextActionBean = addon.getForceActionBean("Protection", bopTargetString);
+				local actionString = (bopTargetString == "player") and "Bubble" or "Protection";
+				addon.nextActionBean = addon.getForceActionBean(actionString, bopTargetString);
 			end
 		elseif followName then
 			addon.followBean.targetName = followName;

@@ -408,7 +408,7 @@ while True:
           currentActiveWindow.lastTargetIndex = currentTargetIndex
           writeToSerial(targetIndexToSerial(currentTargetIndex))
 
-          doSleep(0.15 + (random.random() / 20))
+          doSleep(0.05 + (random.random() / 20))
 
         if (currentActionIndex in STATIONARY_ACTION_INDEXES):
           writeToSerial(79 + round(random.random()))
