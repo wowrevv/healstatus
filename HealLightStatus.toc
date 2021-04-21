@@ -1,0 +1,24 @@
+## Interface: 11302
+## Version: 1.0.3
+## Title: 000 Heal Light Status
+## Author: Perry Fraser
+## Notes: Floating Configurable Mana Bar
+## eMail: perryfraser@gmail.com
+## URL: aftc.io
+## DefaultState: Enabled
+## LoadOnDemand: 0
+
+## ORDER IS IMPORTANT
+#@no-lib-strip@
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\LibHealComm-4.0\LibHealComm-4.0.xml
+#@end-no-lib-strip@
+
+embeds.xml
+
+ScoreCalculator.lua
+CleanseCalculator.lua
+GestureHandler.lua
+Macros.lua
+HealLightStatus.lua
