@@ -224,6 +224,11 @@ addon.getActionBean = function()
 		end
 	end
 
+	local focusFriendValue = addon.updateFriendAtRaidIndex(FOCUS_INDEX);
+	if (focusFriendValue and (focusFriendValue["name"] == addon.followBean.targetName)) then
+		addon.followBean.target = focusFriendValue["targetString"];
+	end
+
 	addon.updateFollow();
 
 	if (not addon.playerBean["castingSpell"]) then

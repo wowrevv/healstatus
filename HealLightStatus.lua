@@ -704,7 +704,7 @@ addon.getActionBeanPriest = function()
 
 				if (not addon.playerBean["isMoving"]) then
 					-- can only cast moving things
-					if (v["flashHealScore"] and v["flashHealScore"] > highestActionValue) then
+					if (v["flashHealScore"] gand v["flashHealScore"] > highestActionValue) then
 						highestAction = "FlashHeal";
 						highestActionValue = v["flashHealScore"];
 						highestActionTarget = v["targetString"];
@@ -794,7 +794,7 @@ addon.getActionBean = function()
 		end
 	end
 	
-	addon.currentDangerValue = 1 - (friendHealthRatio / friendCount);
+	addon.currentDangerValue = 1 - (friendHealthRatio / (friendCount + 1));
 
 	addon.updateTank();
 	addon.updateFollow();
