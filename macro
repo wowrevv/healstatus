@@ -1,35 +1,33 @@
-ctrl alt shift - raid8
-ctrl alt - raid7
-ctrl shift - raid6
-shift alt - raid5
-alt - raid4
-shift - raid3
-ctrl - raid2
- - raid1
+TODO:
 
-/target [mod:ctrl,mod:alt,mod:shift]raid8;[mod:ctrl,mod:alt]raid7; [mod:ctrl,mod:shift]raid6;[mod:shift,mod:alt]raid5;[mod:alt]raid4;[mod:shift]raid3;[mod:ctrl]raid2;raid1
+Jump after you Jump (capture spaces, if you're not casting: jump), if you're stationary: jump and push forward at the end of it. If you're moving, jump. (delay of 2 seconds).
 
-/target [mod:ctrl,mod:alt,mod:shift]raid16;[mod:ctrl,mod:alt]raid15; [mod:ctrl,mod:shift]raid14;[mod:shift,mod:alt]raid13;[mod:alt]raid12;[mod:shift]raid11;[mod:ctrl]raid10;raid9
+--
 
-/target [mod:ctrl,mod:alt,mod:shift]raid24;[mod:ctrl,mod:alt]raid23; [mod:ctrl,mod:shift]raid22;[mod:shift,mod:alt]raid21;[mod:alt]raid20;[mod:shift]raid19;[mod:ctrl]raid18;raid17
+accept trade
 
-/target [mod:ctrl,mod:alt,mod:shift]raid32;[mod:ctrl,mod:alt]raid31; [mod:ctrl,mod:shift]raid30;[mod:shift,mod:alt]raid29;[mod:alt]raid28;[mod:shift]raid27;[mod:ctrl]raid26;raid25
+--
 
-/target [mod:ctrl,mod:alt,mod:shift]raid40;[mod:ctrl,mod:alt]raid39; [mod:ctrl,mod:shift]raid38;[mod:shift,mod:alt]raid37;[mod:alt]raid36;[mod:shift]raid35;[mod:ctrl]raid34;raid33
+Change the pixel reader/writer: make it completely binary on each sub pixel
 
+[1] - needs read pixel
+[2] - 2 ^ 6 = 64
+  Selection,
+    0 - Nothing, ignore
+    1 - Player
+    2-5 - Party
+    6-46 - Raid
 
-      if (currentActionIndex in RANGE_ACTION_INDEXES):
-        # currently only for warlocks, so hard coding the siphon
-        writeToSerial(SUB_LIGHT_ACTION_INDEXES[3])
-        doSleep(0.225 + (random.random() / 20))
+    47 - points on the ground
 
-        # start the cast
-        writeToSerial(SUB_LIGHT_ACTION_INDEXES[currentActionIndex])
-        doSleep(0.025 + (random.random() / 20))
+[2] - 2 ^ 6 = 64
+  Abilities
+    Just as before but simpler
 
-        # click the cast
-        x = currentActiveWindow.x + (currentActiveWindow.w / 2)
-        y = currentActiveWindow.y + (currentActiveWindow.h / 2)
+So we can reduce the pixel count down to 5, and have an entry pixel to read.
 
-        writeMouseToSerial(x, y)
-      else:
+--
+
+Furthermore:
+
+Make a druid cat thingie.  

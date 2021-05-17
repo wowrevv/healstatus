@@ -12,7 +12,7 @@ end
 
 addon.initMacro = function()
 	addon.makeMacro("Party", "132163", 
-"/tar [mod:shift,mod:alt]party4;[mod:alt]party3;[mod:shift]party2;[mod:ctrl]party1;player");
+"/tar [mod:shift,mod:ctrl]focus;[mod:shift,mod:alt]party4;[mod:alt]party3;[mod:shift]party2;[mod:ctrl]party1;player");
 	addon.makeMacro("Raid1", "132163", 
 "/tar [mod:ctrl,mod:alt,mod:shift]raid8;[mod:ctrl,mod:alt]raid7; [mod:ctrl,mod:shift]raid6;[mod:shift,mod:alt]raid5;[mod:alt]raid4;[mod:shift]raid3;[mod:ctrl]raid2;raid1");
 	addon.makeMacro("Raid2", "132163", 

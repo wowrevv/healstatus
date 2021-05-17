@@ -21,7 +21,7 @@ LIGHT_RAID_INDEX_COUNT = 15
 
 SUB_LIGHT_PLAYER_INDEX = 1
 SUB_LIGHT_PARTY_INDEX = 2
-SUB_LIGHT_RAID_INDEX = 7
+SUB_LIGHT_RAID_INDEX = 8
 
 LIGHT_RAID_ACTION_COUNT = 5
 
@@ -47,6 +47,9 @@ SUB_LIGHT_ACTION_INDEXES = {
 
 	15: -1, # "Nothing"
 }
+FORCE_OVERRIDE_INDEXES = [
+  4, 13, 14
+]
 STATIONARY_ACTION_INDEXES = [
   0, 1, 5, 8, 9, 10, 11
 ]
@@ -103,7 +106,7 @@ def targetIndexToSerial(v):
   # player values = 0, 1, 2
   # party values = 4, 5, 6, 7, 8, 9
   retValue = 0
-  if (v >= 2 and v < 7):
+  if (v >= 2 and v < SUB_LIGHT_RAID_INDEX):
     partyEncode = 0x37
     # in party
     partyValue = v - 1
@@ -111,7 +114,7 @@ def targetIndexToSerial(v):
 
     return partyEncode + modifierValues
     
-  elif (v >= 7):
+  elif (v >= SUB_LIGHT_RAID_INDEX):
     raidEncodes = [
       0x2f,
       0x30,
@@ -119,7 +122,7 @@ def targetIndexToSerial(v):
       0x34,
       0x38
     ]
-    raidValue = v - 7
+    raidValue = v - SUB_LIGHT_RAID_INDEX
     modifierValues = getTargetModifier(raidValue)
 
     raidKey = math.floor(raidValue / 8)
@@ -390,7 +393,7 @@ while True:
 
       doSleep(0.15)
 
-    elif (currentActionIndex == 4 or deltaTimeGCD > GCD_THRESHOLD):
+    elif ((currentActionIndex in FORCE_OVERRIDE_INDEXES) or deltaTimeGCD > GCD_THRESHOLD):
       if (currentActionIndex in RANGE_ACTION_INDEXES):
         # start the cast
         writeToSerial(SUB_LIGHT_ACTION_INDEXES[currentActionIndex])

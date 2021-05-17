@@ -112,7 +112,10 @@ local LIGHT_COUNT =
 
 local SUB_LIGHT_PLAYER_INDEX = 1;
 local SUB_LIGHT_PARTY_INDEX = 2;
-local SUB_LIGHT_RAID_INDEX = 7;
+local SUB_LIGHT_FOCUS_INDEX = 7;
+local SUB_LIGHT_RAID_INDEX = 8;
+
+local FOCUS_INDEX = -1234;
 
 local BLESSING_KEY = "Blessing";
 local FORTITUDE_KEY = "Fortitude";
@@ -292,6 +295,8 @@ addon.onUpdateHandler = function(self, elapsed)
 			if (target) then
 				if (target.type == "player") then
 					targetSubIndex = SUB_LIGHT_PLAYER_INDEX;
+				elseif (target.type == "focus") then
+					targetSubIndex = SUB_LIGHT_FOCUS_INDEX;
 				elseif (target.type == "party") then
 					targetSubIndex = SUB_LIGHT_PARTY_INDEX + target.index;
 				elseif (target.type == "raid") then
@@ -768,6 +773,8 @@ addon.getActionBean = function()
 
 	local friendCount = 0;
 	local friendHealthRatio = 0;
+	
+	addon.updateFriendAtRaidIndex(FOCUS_INDEX);
 
 	for raidIndex = 1, 40 do
 		-- update the raid members
@@ -785,7 +792,6 @@ addon.getActionBean = function()
 				addon.tankBean.target = friendValue["targetString"];
 			end
 		end
-		
 	end
 	
 	addon.currentDangerValue = 1 - (friendHealthRatio / friendCount);
@@ -888,11 +894,21 @@ addon.getIndexFromTargetString = function(targetString)
 		end
 	end
 
+	if targetString == "focus" then
+		return {
+			type = "focus"
+		};
+	end
+
 	if (targetString == "player") then return { type = "player" } end
 	return nil;
 end
 
 addon.getTargetStringFromIndex = function(index)
+	if (index == FOCUS_INDEX) then
+		return "focus";
+	end
+
 	local name, rank, subgroup, _, class, _, zone, online, isDead, role = GetRaidRosterInfo(index);
 
 	for raidIndex = 1, 40 do
@@ -915,6 +931,7 @@ addon.getTargetStringFromIndex = function(index)
 
 	local playerName = GetUnitName("player");
 	if (playerName == name) then return "player"; end
+	
 	return "";
 end
 
