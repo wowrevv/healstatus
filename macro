@@ -1,0 +1,33 @@
+TODO:
+
+Jump after you Jump (capture spaces, if you're not casting: jump), if you're stationary: jump and push forward at the end of it. If you're moving, jump. (delay of 2 seconds).
+
+--
+
+accept trade
+
+--
+
+Change the pixel reader/writer: make it completely binary on each sub pixel
+
+[1] - needs read pixel
+[2] - 2 ^ 6 = 64
+  Selection,
+    0 - Nothing, ignore
+    1 - Player
+    2-5 - Party
+    6-46 - Raid
+
+    47 - points on the ground
+
+[2] - 2 ^ 6 = 64
+  Abilities
+    Just as before but simpler
+
+So we can reduce the pixel count down to 5, and have an entry pixel to read.
+
+--
+
+Furthermore:
+
+Make a druid cat thingie.  
